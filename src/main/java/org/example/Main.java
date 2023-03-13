@@ -18,8 +18,6 @@ public class Main {
 
         WebcamHandler webcamHandler = new WebcamHandler();
         service.submit(webcamHandler);
-
-        VideoEncoder.encode();
         MainFrame.init();
 
     }

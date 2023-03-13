@@ -1,6 +1,7 @@
 package org.example;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
+import jmapps.ui.VideoPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +15,8 @@ public class MainFrame {
     private static JPanel infoPanel;
     private static JButton matchBtn;
 
+    private static VideoOutput videoOutput;
+
 
     public static void init() throws InterruptedException, IOException {
         frame = new JFrame("ChatBox Client");
@@ -25,7 +28,6 @@ public class MainFrame {
 
         videoPanel = new JPanel();
         videoPanel.setPreferredSize(new Dimension(640, 480));
-        videoPanel.setBackground(Color.RED);
 
         controlsPanel = new JPanel();
         controlsPanel.setLayout(new FlowLayout());
@@ -41,6 +43,14 @@ public class MainFrame {
         panel.setPreferredSize(new Dimension(160, 120));
         controlsPanel.add(panel);
 
+        videoOutput = new VideoOutput();
+        videoOutput.setPreferredSize(new Dimension(640,480));
+        videoPanel.add(videoOutput);
+
+        VideoEncoder.encode();
+
+
+
         matchBtn = new JButton("Match");
         matchBtn.setPreferredSize(new Dimension(160, 40));
         controlsPanel.add(matchBtn);
@@ -49,7 +59,5 @@ public class MainFrame {
         frame.add(controlsPanel, BorderLayout.EAST);
         frame.add(videoPanel, BorderLayout.CENTER);
         frame.pack();
-
-        VideoEncoder.encode();
     }
 }
